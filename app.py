@@ -51,8 +51,6 @@ st.markdown("""
     </a>
 </div>
 """, unsafe_allow_html=True)
-# 🔽 ADD VIDEO HERE
-st.video("https://youtu.be/l4KEN81CBvw")
 
 st.divider()
 
