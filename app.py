@@ -13,6 +13,48 @@ st.title("📈 Strategy Performance Dashboard")
 st.caption("Portfolio-level performance analysis | Created by Nitin Joshi")
 
 st.divider()
+# ============================
+# BOOKING CTA WITH BUTTON
+# ============================
+st.markdown("""
+<div style="
+    background: #1e293b;
+    padding: 20px;
+    border-radius: 12px;
+    border: 1px solid #3b82f6;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+">
+    <div style="flex: 1; min-width: 300px;">
+        <p style="margin:0; color: #f8fafc; font-size: 15px; line-height: 1.5;">
+            👋 <b>Need Personal Guidance?</b><br>
+            If you have any doubts, want to discuss a strategy in detail, or need personal guidance, let's connect 1-on-1.
+        </p>
+    </div>
+    <a href="https://superprofile.bio/bookings/beingsystemtrader" target="_blank" style="text-decoration: none;">
+        <div style="
+            background-color: #3b82f6;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 14px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            transition: 0.3s;
+        ">
+            Book Session Here
+        </div>
+    </a>
+</div>
+""", unsafe_allow_html=True)
+# 🔽 ADD VIDEO HERE
+st.video("https://youtu.be/l4KEN81CBvw")
+
+st.divider()
 
 # =========================
 # FILE UPLOAD (MULTIPLE CSV)
