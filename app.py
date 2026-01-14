@@ -140,4 +140,61 @@ if dashboard_files:
     show_percentage = st.checkbox("Show PnL in Percentage (%)", value=False)
 
     df["Year"] = df["Entry Date"].dt.year
-    df["Month"] = df["]()
+    df["Month"] = df["Entry Date"].dt.strftime("%b")
+
+    monthly_table = (
+        df
+        .groupby(["Year", "Month"])["Net P/L"]
+        .sum()
+        .unstack(fill_value=0)
+    )
+
+    month_order = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"]
+    monthly_table = monthly_table.reindex(columns=month_order, fill_value=0)
+
+    monthly_table["Total"] = monthly_table.sum(axis=1)
+
+    yearly_dd = df.groupby("Year")["Drawdown"].min()
+    monthly_table["Max Drawdown"] = yearly_dd
+
+    monthly_table_pct = (monthly_table / total_capital) * 100
+
+    def pnl_color(val):
+        if val > 0:
+            return "color: #2dd4bf"
+        elif val < 0:
+            return "color: #ff4d4d"
+        return ""
+
+    if show_percentage:
+        styled = (
+            monthly_table_pct
+            .style
+            .applymap(pnl_color)
+            .format("{:.2f}%")
+        )
+    else:
+        styled = (
+            monthly_table
+            .style
+            .applymap(pnl_color)
+            .format("{:,.0f}")
+        )
+
+    st.dataframe(styled, use_container_width=True, height=320)
+
+    # =========================
+    # TRADE LOG
+    # =========================
+    st.markdown("---")
+    st.subheader("📋 Trade Log")
+
+    with st.expander("View Full Trade Log"):
+        st.dataframe(
+            df.drop(columns=["Trade #"], errors="ignore"),
+            use_container_width=True,
+            height=400
+        )
+
+else:
+    st.info("Upload one or more merged trade report CSVs to view performance.")
