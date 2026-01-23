@@ -30,7 +30,7 @@ st.markdown("""
     gap: 15px;
 ">
     <div style="flex: 1; min-width: 300px;">
-        <p style="margin:0; color: #f8fafc; font-size: 15px; line-height: 1.5;">
+        <p style="margin:0; color: #f8fafc; font-size: 13px; line-height: 1.5;">
             👋 <b>Need Personal Guidance?</b><br>
             If you have any doubts, want to discuss a strategy in detail, or need personal guidance, let's connect 1-on-1.
         </p>
@@ -42,7 +42,7 @@ st.markdown("""
             padding: 10px 20px;
             border-radius: 8px;
             font-weight: bold;
-            font-size: 14px;
+            font-size: 12px;
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
             transition: 0.3s;
         ">
