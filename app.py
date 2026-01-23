@@ -114,6 +114,14 @@ if dashboard_files:
     df["Peak Equity"] = df["Equity"].cummax()
     df["Drawdown"] = df["Equity"] - df["Peak Equity"]
     df["Drawdown %"] = (df["Drawdown"] / total_capital) * 100
+    
+    # -------------------------
+    # WINNING PROBABILITY
+    # -------------------------
+    winning_trades = (df["Net P/L"] > 0).sum()
+    losing_trades = (df["Net P/L"] < 0).sum()
+    
+    win_rate = (winning_trades / total_trades) * 100 if total_trades > 0 else 0
 
     # -------------------------
     # METRICS
@@ -133,14 +141,19 @@ if dashboard_files:
     # =========================
     # METRIC CARDS
     # =========================
-    c1, c2, c3, c4, c5 = st.columns(5)
+    c1, c2, c3, c4, c5, c6 = st.columns(6)
 
     c1.metric("Total Profit", f"₹{total_profit:,.0f}")
     c2.metric("Total Return", f"{total_return_pct:.2f}%")
     c3.metric("Total Capital", f"₹{total_capital:,.0f}")
     c4.metric("Avg Monthly Profit", f"₹{avg_monthly_profit:,.0f}")
     c5.metric("Avg Monthly Profit %", f"{avg_monthly_profit_pct:.2f}%")
-
+    c6.metric(
+        "Winning Probability",
+        f"{win_rate:.2f}%",
+        f"{winning_trades} Wins / {losing_trades} Losses"
+    )
+    
     st.markdown("---")
 
     # =========================
