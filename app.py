@@ -95,11 +95,11 @@ if dashboard_files:
     • This is NOT a trading recommendation.  
     • Past performance does NOT guarantee future returns.  
     • I/Owner is NOT SEBI registered.  
-    • Please consult your financial advisor before taking any trading decisions.
+    • Please consult your financial advisor before taking any trading decisions.  
     • Past performance is not indicative of future results. Markets are subject to risks and losses are possible.
     """)
 
-    disclaimer_accepted = st.checkbox("I have read and agree to the above disclaimer")
+    disclaimer_accepted = st.checkbox("I have read and agree to the above disclaimer. I am using this data for educational purpose.")
 
     if not disclaimer_accepted:
         st.stop()   # ⛔ Stops app here until user accepts
