@@ -84,6 +84,24 @@ total_charges = st.number_input(
 # PROCESS DATA
 # =========================
 if dashboard_files:
+    # =========================
+    # LEGAL DISCLAIMER (MUST ACCEPT BEFORE SEEING DATA)
+    # =========================
+
+    st.warning("""
+    **DISCLAIMER**
+    
+    • The report you are about to see is based solely on the CSV file you uploaded.  
+    • This is NOT a trading recommendation.  
+    • Past performance does NOT guarantee future returns.  
+    • I/Owner is NOT SEBI registered.  
+    • Please consult your financial advisor before taking any trading decisions.
+    """)
+
+    disclaimer_accepted = st.checkbox("I have read and agree to the above disclaimer")
+
+    if not disclaimer_accepted:
+        st.stop()   # ⛔ Stops app here until user accepts
 
     df_list = []
 
