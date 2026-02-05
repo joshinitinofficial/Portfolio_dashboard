@@ -96,6 +96,7 @@ if dashboard_files:
     • Past performance does NOT guarantee future returns.  
     • I/Owner is NOT SEBI registered.  
     • Please consult your financial advisor before taking any trading decisions.
+    • Past performance is not indicative of future results. Markets are subject to risks and losses are possible.
     """)
 
     disclaimer_accepted = st.checkbox("I have read and agree to the above disclaimer")
