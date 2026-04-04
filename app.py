@@ -1,3 +1,4 @@
+```python
 import streamlit as st
 import pandas as pd
 
@@ -99,10 +100,12 @@ if dashboard_files:
     • Past performance is not indicative of future results. Markets are subject to risks and losses are possible.
     """)
 
-    disclaimer_accepted = st.checkbox("I have read and agree to the above disclaimer. I am using this data for educational purpose.")
+    disclaimer_accepted = st.checkbox(
+        "I have read and agree to the above disclaimer. I am using this data for educational purpose."
+    )
 
     if not disclaimer_accepted:
-        st.stop()   # ⛔ Stops app here until user accepts
+        st.stop()
 
     df_list = []
 
@@ -133,22 +136,23 @@ if dashboard_files:
     df["Peak Equity"] = df["Equity"].cummax()
     df["Drawdown"] = df["Equity"] - df["Peak Equity"]
     df["Drawdown %"] = (df["Drawdown"] / total_capital) * 100
-    
+
     # -------------------------
     # WINNING PROBABILITY
     # -------------------------
     winning_trades = (df["Net P/L"] > 0).sum()
     losing_trades = (df["Net P/L"] < 0).sum()
-    
+
     win_rate = (winning_trades / total_trades) * 100 if total_trades > 0 else 0
-    
+
     # -------------------------
     # RISK REWARD RATIO
     # -------------------------
     avg_win = df.loc[df["Net P/L"] > 0, "Net P/L"].mean()
     avg_loss = df.loc[df["Net P/L"] < 0, "Net P/L"].mean()
-    
+
     risk_reward_ratio = abs(avg_win / avg_loss) if avg_loss and avg_loss != 0 else 0
+    avg_loss_display = 0 if pd.isna(avg_loss) else abs(avg_loss)
 
     # -------------------------
     # METRICS
@@ -175,11 +179,15 @@ if dashboard_files:
     c3.metric("Total Capital", f"₹{total_capital:,.0f}")
     c4.metric("Avg Monthly Profit", f"₹{avg_monthly_profit:,.0f}")
     c5.metric("Avg Monthly Profit %", f"{avg_monthly_profit_pct:.2f}%")
-    c6.metric( "Winning Probability", f"{win_rate:.2f}%", f"{winning_trades} Wins / {losing_trades} Losses")
+    c6.metric(
+        "Winning Probability",
+        f"{win_rate:.2f}%",
+        f"{winning_trades} Wins / {losing_trades} Losses"
+    )
     c7.metric(
         "Risk-Reward Ratio",
         f"{risk_reward_ratio:.2f}",
-        f"Avg Win ₹{avg_win:,.0f} | Avg Loss ₹{abs(avg_loss):,.0f}"
+        f"Avg Win ₹{avg_win:,.0f} | Avg Loss ₹{avg_loss_display:,.0f}"
     )
 
     st.markdown("---")
@@ -251,14 +259,14 @@ if dashboard_files:
         styled = (
             monthly_table_pct
             .style
-            .applymap(pnl_color)
+            .map(pnl_color)
             .format("{:.2f}%")
         )
     else:
         styled = (
             monthly_table
             .style
-            .applymap(pnl_color)
+            .map(pnl_color)
             .format("{:,.0f}")
         )
 
@@ -279,3 +287,4 @@ if dashboard_files:
 
 else:
     st.info("Upload one or more merged trade report CSVs to view performance.")
+```
