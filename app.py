@@ -287,4 +287,3 @@ if dashboard_files:
 
 else:
     st.info("Upload one or more merged trade report CSVs to view performance.")
-```
